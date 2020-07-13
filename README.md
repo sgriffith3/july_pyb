@@ -1,2 +1,4 @@
 # july_pyb
-Repo for PYB public class
+
+
+Learning to use Python!
