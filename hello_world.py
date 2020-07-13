@@ -7,10 +7,10 @@ print('Say \n\n"Hello"\n\nplease')
 
 print('''
 This
-is 
+is
 a 
 multiline
 string
 ''')
 
-print("It is time for a break (in 2 minutes)")
+print("It is time for us to end for the day (in 2 minutes)")
