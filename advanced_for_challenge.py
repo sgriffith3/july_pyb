@@ -7,9 +7,10 @@
 
 # Using a for loop, enumerate the list, capturing the index and the value
 # https://docs.python.org/3/library/functions.html#enumerate
+# for car_num, car in enumarate(cars):
 
 # Use if/elif/else statement(s) to determine the order of tasks based on their index
-# index 0 = first
+# index 0 = "first"
 # index 1 = second
 # index 2 = third
 # index 3 = fourth
