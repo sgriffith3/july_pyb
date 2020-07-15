@@ -20,7 +20,7 @@ for ind, chore in enumerate(todo, 1):
         order = "fifth"
 
 # Use if/elif/else statement(s) to determine the order of tasks based on their index
-# index 0 = first
+# index 0 = "first"
 # index 1 = second
 # index 2 = third
 # index 3 = fourth
