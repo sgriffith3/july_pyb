@@ -34,9 +34,11 @@ def build_db():
     d_b.execute("""CREATE TABLE IF NOT EXISTS Users (fname,lname,uname,age)""")
 
     # This command populates the database with some specific values
-    d_b.execute("""
+    d_b.execute(
+        """
               INSERT INTO Users (fname,lname,uname,age) 
-              VALUES ('Sam','Griffith','sgriffith3','27')""")
+              VALUES ('Sam','Griffith','sgriffith3','27')"""
+    )
 
     # This command essentially is the "save" button
     # This is where the changes made will actually get applied
@@ -80,7 +82,9 @@ def upload_to_box(filename, folder_id):
     This function uploads our file "filename" to a specific folder inside of our box account
     """
     new_file = client.folder(folder_id).upload(filename)
-    print('File "{0}" uploaded to Box with file ID {1}'.format(new_file.name, new_file.id))
+    print(
+        'File "{0}" uploaded to Box with file ID {1}'.format(new_file.name, new_file.id)
+    )
 
 
 def main():
