@@ -1,17 +1,86 @@
+#!/usr/bin/env python3
+""" 
+Request:
+    Export data from a table on a database and upload it to a storage area like box
+
+What this code does:
+    This code creates a sqlite database (mydb.db) with one table, and inserts one entry into it.
+    Then, the code reads the data on the table, and saves it into a file.
+    Finally, this code uses the boxsdk to upload our new file
+"""
+
+from boxsdk import DevelopmentClient
 import sqlite3
 
-conn = sqlite3.connect("mydb.db")
+# This will prompt you for your Development Token - Get it from your box project
+client = DevelopmentClient()
 
-db = conn.cursor()
 
-db.execute("""CREATE TABLE IF NOT EXISTS Users (fname,lname,uname,age)""")
+def build_db():
+    """
+    This function builds and populates the database
+    """
 
-db.execute("""INSERT INTO Users (fname,lname,uname,age) VALUES ('Sam','Griffith','sgriffith3','27')""")
+    # This will connect to an existing database or create a new database
+    conn = sqlite3.connect("mydb.db")
+    
+    # This sets up a cursor object to interact with the database
+    db = conn.cursor()
+    
+    # This creates a table if it is not already there, called Users, with the four fields listed
+    db.execute("""CREATE TABLE IF NOT EXISTS Users (fname,lname,uname,age)""")
+    
+    # This command populates the database with some specific values
+    db.execute("""INSERT INTO Users (fname,lname,uname,age) VALUES ('Sam','Griffith','sgriffith3','27')""")
+    # This command essentially is the "save" button, where the changes made will actually get applied
+    conn.commit()
 
-conn.commit()
 
-users = db.execute("""SELECT * from Users""")
-all_users = users.fetchall()
-for user in all_users:
-    print(user)
+def build_file(filename):
+    """
+    This function reads all the information from the Users table and saves it into a file
+    """
+
+    # This will connect to an existing database or create a new database
+    conn = sqlite3.connect("mydb.db")
+    
+    # This sets up a cursor object to interact with the database
+    db = conn.cursor()
+ 
+    # Select all the information from the table called Users
+    users = db.execute("""SELECT * from Users""")
+
+    # The fetchall() function returns an iterable object
+    all_users = users.fetchall()
+
+    # Iterate through all lines of the database, and save them into a list
+    user_info = []
+    for user in all_users:
+        user_info.append(user)
+
+    with open(filename, "w") as f:
+        f.writelines(user_info)
+
+
+def upload_to_box(filename, folder_id):
+    """
+    This function uploads our file "filename" to a specific folder inside of our box account
+    """
+    new_file = client.folder(folder_id).upload(filename)
+    print('File "{0}" uploaded to Box with file ID {1}'.format(new_file.name, new_file.id))
+
+
+def main():
+    """
+    This is the main function
+    """
+    db_build()
+    filename = input("What file do you wish to upload?\n")
+    build_file(filename)
+    folder_id = input("What folder do you wish to upload to? Provide your folder_id\n")
+    upload_to_box(filename, folder_id)
+
+
+main()
+# folder_id = '118025580874'
 
