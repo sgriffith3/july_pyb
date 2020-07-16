@@ -1,0 +1,1 @@
+curl -X POST https://upload.box.com/api/2.0/files/content -H 'Authorization: Bearer 2t8xdBRYPc7SsQLCK2n84Y0x2sJXvqEt' -H "Content-Type: multipart/form-data" -F attributes='{"name":"advanced_for.py", "parent":{"id":"118025580874"}}' -F file=@advanced_for.py
