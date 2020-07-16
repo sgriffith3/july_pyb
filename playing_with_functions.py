@@ -1,12 +1,18 @@
-# Functions
+#!/usr/bin/env python3
+"""
+Here is the docstring
+"""
 
-a = 7
-print(isinstance(a, int))
+A = 7
+print(isinstance(A, int))
 
 def add_2_nums():
-    x = 5
-    y = 3
-    result = x + y
+    """
+    This adds 2 numbers together
+    """
+    ax = 5
+    ay = 3
+    result = ax + ay
     return result
     #return "poodle"
 
@@ -49,5 +55,3 @@ def switchy_text(txt1="mine", txt2="yours"):
 
 switchy_text()
 switchy_text(txt2="his", txt1="hers")
-
-
